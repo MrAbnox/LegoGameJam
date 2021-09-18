@@ -12,7 +12,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     float currentBoostValue = 0;
     float currentColor ;
 
-
+    
 
     ILEGODevice device;
 
@@ -80,8 +80,8 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
             pitchMotor.RegisterDelegate(this);
             var cmd = new LEGOTachoMotorCommon.SetSpeedPositionCommand()
             {
-            Position = -90,
-            Speed = 80
+            Position = 0,
+            Speed = 1
             };
             cmd.SetEndState(MotorWithTachoEndState.Drifting);
             pitchMotor.SendCommand(cmd);
@@ -248,10 +248,11 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         {
             Rotate(80);
         }
-        // print(currentRollValue);
+        Debug.Log("currentRollValue {0}" + currentRollValue );
+        // Debug.Log("currentPitchValue {0}" + currentPitchValue );
         // print(currentPitchValue);
         // print(currentColor3);
-        print(currentColor);
+        // print(currentColor);
         // print(currentBoostValue);
     }
 }
