@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
         quitbtn.onClick.AddListener(QuitGame);
         isOnline.color = Color.black;
         statusText.text = "No Technic Hub found!";
-        ConnectHub();
+
     }
 
     void StartGame()
