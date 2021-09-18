@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 {
     float currentRollValue = 0;
-    float currentPitchValue = 0;
+    public float currentPitchValue = 0;
     public float currentBoostValue = 0;
     float currentColor ;
 
@@ -303,9 +303,10 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         {
             CurrentColorPuzzle = 0;
         }
-        print(currentColor);
+        // print(currentColor);
+        // print(currentRollValue); //port A
         // Debug.Log("currentPitchValue {0}" + currentPitchValue );
-        // print(currentPitchValue);
+        // print(currentPitchValue);//port C
         // print(currentColor3);
         // print(currentColor);
         // print(currentBoostValue);
