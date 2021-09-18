@@ -11,7 +11,19 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     float currentRollValue = 0;
     public float currentPitchValue = 0;
     public float currentBoostValue = 0;
-    float currentColor ;
+    float currentColor;
+
+    [SerializeField] private int angleA;
+    [SerializeField] private int angleB;
+    [SerializeField] private int angleC;
+    [SerializeField] private float timeBetweenABC;
+
+    [SerializeField] private TaskABC[] abcTasks;
+    private int lastABC = -1;
+
+    private float currentTime = 0;
+    private bool isMotor;
+    public bool isABCTaskActive;
 
 
     // color puzzle
@@ -41,6 +53,11 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     LEGOVisionSensor visionSensor;
 
 
+    private void Start()
+    {
+        isABCTaskActive = false;
+    }
+
     public void SetUpWithDevice(ILEGODevice device)
     {
 
@@ -56,8 +73,6 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
             rgbLight = (LEGORGBLight)(lightServices.First());
             Debug.LogFormat("Has light service {0}", rgbLight);
             rgbLight.UpdateCurrentInputFormatWithNewMode((int)LEGORGBLight.RGBLightMode.Discrete);
-
-
         }
 
 
@@ -69,18 +84,12 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         }
         else
         {
+            Debug.Log("MOTOR is ON");
+            isMotor = true;
             rollMotor = (LEGOTechnicMotor)rollMotors.First();
             Debug.LogFormat("Has motor service {0}", rollMotor);
             rollMotor.UpdateInputFormat(new LEGOInputFormat(rollMotor.ConnectInfo.PortID, rollMotor.ioType, rollMotor.PositionModeNo, 1, LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw, true));
             rollMotor.RegisterDelegate(this);
-
-            // var cmd = new LEGOTachoMotorCommon.SetSpeedPositionCommand()
-            // {
-            //   Position = 0,
-            //   Speed = 80
-            // };
-            // cmd.SetEndState(MotorWithTachoEndState.Drifting);
-            // rollMotor.SendCommand(cmd);
         }
 
         Debug.LogFormat("Setting pitch motor");// Must be connected to port C.
@@ -156,12 +165,10 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         if (service == pitchMotor)
         {
             currentPitchValue = newValue.RawValues[0];
-
         }
         else if (service == rollMotor)
         {
             currentRollValue = newValue.RawValues[0];
-
         }
         else if (service == forceSensor)
         {
@@ -180,7 +187,6 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         {
             currentColor = newValue.RawValues[0];
         }
-
     }
 
     public void DidUpdateMeasuredColorFrom(LEGOColorSensor colorSensor, LEGOValue oldColorIndex, LEGOValue newColorIndex)
@@ -256,30 +262,43 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 
     private void Update()
     {
-
-
-
         //by Mahmoud//
         // Blink();
-        if (Input.GetKeyDown(KeyCode.F))
+
+        if (isMotor && !isABCTaskActive)
         {
+            currentTime += Time.deltaTime;
 
-            Rotate(20);
-            // print(technicDistanceSensor.State);
-            // print(colorSensor.State);
-            // print(currentBoostValue);
-            // changeCollor();
+            if(currentTime >= timeBetweenABC)
+            {
+                isABCTaskActive = true;
+                currentTime = 0;
 
-        }
+                int randomABC = 0;
+                do
+                {
+                    randomABC = Random.Range(0, 3);
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Rotate(50);
-        }
+                } while (randomABC == lastABC);
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Rotate(80);
+                lastABC = randomABC;
+
+                abcTasks[lastABC].Activate();
+
+                Debug.Log("NEXT ROTATION: " + lastABC);
+                if(lastABC == 0)
+                {
+                    Rotate(angleA);
+                }
+                else if(lastABC == 1)
+                {
+                    Rotate(angleB);
+                }
+                else if(lastABC == 2)
+                {
+                    Rotate(angleC);
+                }
+            }
         }
         // Debug.Log("currentRollValue {0}" + currentRollValue );
 
@@ -310,6 +329,5 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         // print(currentColor3);
         // print(currentColor);
         // print(currentBoostValue);
-
     }
 }

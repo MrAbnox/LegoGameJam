@@ -13,7 +13,6 @@ public class RobotGame : MonoBehaviour
     void Start()
     {
         robotController = GetComponent<RobotController>();
-        Debug.Log("TEST");
         deviceHandler.OnDeviceInitialized += OnDeviceInitialized;
         if (connectToBLE == true)
             deviceHandler.AutoConnectToDeviceOfType(HubType.Technic);
