@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 {
-    float currentRollValue = 0;
+    public float currentRollValue = 0;
     public float currentPitchValue = 0;
     public float currentBoostValue = 0;
     float currentColor;
@@ -106,8 +106,8 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
             pitchMotor.RegisterDelegate(this);
             var cmd = new LEGOTachoMotorCommon.SetSpeedPositionCommand()
             {
-            Position = 0,
-            Speed = 1
+                Position = 0,
+                Speed = 1
             };
             cmd.SetEndState(MotorWithTachoEndState.Drifting);
             pitchMotor.SendCommand(cmd);
@@ -137,24 +137,24 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         }
         else
         {
-            visionSensor = (LEGOVisionSensor) (visionSensorServises.First());
+            visionSensor = (LEGOVisionSensor)(visionSensorServises.First());
             Debug.LogFormat("Has visionSensor service {0}", visionSensor);
 
-            visionSensor.UpdateInputFormat(new LEGOInputFormat(visionSensor.ConnectInfo.PortID,visionSensor.ioType,0,1,LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw,true));
+            visionSensor.UpdateInputFormat(new LEGOInputFormat(visionSensor.ConnectInfo.PortID, visionSensor.ioType, 0, 1, LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw, true));
             visionSensor.RegisterDelegate(this);
         }
 
         var ColorSensorServises = ServiceHelper.GetServicesOfType(device, IOType.LEIOTypeTechnicColorSensor);
-        if (ColorSensorServises == null ||ColorSensorServises.Count() == 0)
+        if (ColorSensorServises == null || ColorSensorServises.Count() == 0)
         {
             Debug.LogFormat("No Color Distance sensor services found ! ");
         }
         else
         {
-            technicColorSensor = (LEGOTechnicColorSensor) (ColorSensorServises.First());
+            technicColorSensor = (LEGOTechnicColorSensor)(ColorSensorServises.First());
             Debug.LogFormat("Has Color Distance Sensor service {0}", technicColorSensor);
 
-            technicColorSensor.UpdateInputFormat(new LEGOInputFormat(technicColorSensor.ConnectInfo.PortID,technicColorSensor.ioType,0,1,LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw,true));
+            technicColorSensor.UpdateInputFormat(new LEGOInputFormat(technicColorSensor.ConnectInfo.PortID, technicColorSensor.ioType, 0, 1, LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw, true));
             technicColorSensor.RegisterDelegate(this);
         }
         //end
@@ -191,10 +191,10 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 
     public void DidUpdateMeasuredColorFrom(LEGOColorSensor colorSensor, LEGOValue oldColorIndex, LEGOValue newColorIndex)
     {
-      Debug.LogFormat("DidUpdateColorIndexFrom {0} {1}", newColorIndex.RawValues, newColorIndex.RawValues.Length);
-      var currentColor4 = newColorIndex.RawValues;
-      print(currentColor4);
-      // /colorIndicator.color = _defaultColorSet[(int)newColorIndex.RawValues[0]];
+        Debug.LogFormat("DidUpdateColorIndexFrom {0} {1}", newColorIndex.RawValues, newColorIndex.RawValues.Length);
+        var currentColor4 = newColorIndex.RawValues;
+        print(currentColor4);
+        // /colorIndicator.color = _defaultColorSet[(int)newColorIndex.RawValues[0]];
     }
 
     public void DidChangeState(ILEGOService service, ServiceState oldState, ServiceState newState)
@@ -243,7 +243,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     {
         LEGORGBLight.SetColorIndexCommand colorIndexCmd = new LEGORGBLight.SetColorIndexCommand()
         {
-            ColorIndex =5 //5 darkgreen 6 green 7 yellow
+            ColorIndex = 5 //5 darkgreen 6 green 7 yellow
         };
 
         rgbLight.SendCommand(colorIndexCmd);
@@ -269,7 +269,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         {
             currentTime += Time.deltaTime;
 
-            if(currentTime >= timeBetweenABC)
+            if (currentTime >= timeBetweenABC)
             {
                 isABCTaskActive = true;
                 currentTime = 0;
@@ -286,15 +286,15 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
                 abcTasks[lastABC].Activate();
 
                 Debug.Log("NEXT ROTATION: " + lastABC);
-                if(lastABC == 0)
+                if (lastABC == 0)
                 {
                     Rotate(angleA);
                 }
-                else if(lastABC == 1)
+                else if (lastABC == 1)
                 {
                     Rotate(angleB);
                 }
-                else if(lastABC == 2)
+                else if (lastABC == 2)
                 {
                     Rotate(angleC);
                 }
