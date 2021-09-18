@@ -4,30 +4,46 @@ using UnityEngine;
 using LEGODeviceUnitySDK;
 using System.Linq;
 using Unity.LEGO.Utilities;
+using UnityEngine.EventSystems;
 
 public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 {
     float currentRollValue = 0;
     float currentPitchValue = 0;
-    float currentBoostValue = 0;
+    public float currentBoostValue = 0;
     float currentColor ;
 
-    
+
+    // color puzzle
+    //0 --> none
+    //1 --> Blue
+    //2 --> Green
+    //3--> Red
+
+    public static int CurrentColorPuzzle;
 
     ILEGODevice device;
 
     LEGOTechnicMotor pitchMotor;
     LEGOTechnicMotor rollMotor;
     LEGORGBLight rgbLight;
+
+
     LEGOTechnicForceSensor forceSensor;
 
-    LEGOTechnicColorSensor technicColorSensor;
+    // LEGOTechnicColorSensor technicColorSensor;
     // by Mahmoud
     LEGOColorSensor colorSensor;
     LEGOTechnicDistanceSensor technicDistanceSensor;
+
+    LEGOTechnicColorSensor technicColorSensor;
+    // private DistanceSensor distanceSensor;
     LEGOVisionSensor visionSensor;
+
+
     public void SetUpWithDevice(ILEGODevice device)
     {
+
         this.device = device;
         Debug.LogFormat("Setting up light");
         var lightServices = ServiceHelper.GetServicesOfType(device, IOType.LEIOTypeRGBLight);
@@ -43,6 +59,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 
 
         }
+
 
         Debug.LogFormat("Setting roll motor"); // Must be connected to port A.
         var rollMotors = ServiceHelper.GetServicesOfTypeOnPort(device, IOType.LEIOTypeTechnicMotorXL, 0);
@@ -117,6 +134,20 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
             visionSensor.UpdateInputFormat(new LEGOInputFormat(visionSensor.ConnectInfo.PortID,visionSensor.ioType,0,1,LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw,true));
             visionSensor.RegisterDelegate(this);
         }
+
+        var ColorSensorServises = ServiceHelper.GetServicesOfType(device, IOType.LEIOTypeTechnicColorSensor);
+        if (ColorSensorServises == null ||ColorSensorServises.Count() == 0)
+        {
+            Debug.LogFormat("No Color Distance sensor services found ! ");
+        }
+        else
+        {
+            technicColorSensor = (LEGOTechnicColorSensor) (ColorSensorServises.First());
+            Debug.LogFormat("Has Color Distance Sensor service {0}", technicColorSensor);
+
+            technicColorSensor.UpdateInputFormat(new LEGOInputFormat(technicColorSensor.ConnectInfo.PortID,technicColorSensor.ioType,0,1,LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw,true));
+            technicColorSensor.RegisterDelegate(this);
+        }
         //end
     }
 
@@ -140,11 +171,16 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         {
             // currentColor = newValue.;
             // currentColor3 = newValue.RawData[0];
-            currentColor = newValue.RawValues[0];
+            // currentColor = newValue.RawValues[0];
             // currentColor2 = newValue.RawValuesToString();
             // currentColor2 = newValue.ModeName;
             // mm = "false";
         }
+        else if (service == technicColorSensor)
+        {
+            currentColor = newValue.RawValues[0];
+        }
+
     }
 
     public void DidUpdateMeasuredColorFrom(LEGOColorSensor colorSensor, LEGOValue oldColorIndex, LEGOValue newColorIndex)
@@ -220,10 +256,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 
     private void Update()
     {
-        // pri;
-        // Color test = rgbLight.DefaultColor;
-        // print(rgbLight.State);
-        // Debug.Log("Color: " + test);
+
 
 
         //by Mahmoud//
@@ -248,11 +281,34 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
         {
             Rotate(80);
         }
-        Debug.Log("currentRollValue {0}" + currentRollValue );
+        // Debug.Log("currentRollValue {0}" + currentRollValue );
+
+        //Color Puzzle
+        //blue
+        if (currentColor == 3)
+        {
+            CurrentColorPuzzle = 1;
+        }
+        //Green
+        else if (currentColor == 5)
+        {
+            CurrentColorPuzzle = 2;
+        }
+        //Red
+        else if (currentColor == 9)
+        {
+            CurrentColorPuzzle = 3;
+        }
+        else
+        {
+            CurrentColorPuzzle = 0;
+        }
+        print(currentColor);
         // Debug.Log("currentPitchValue {0}" + currentPitchValue );
         // print(currentPitchValue);
         // print(currentColor3);
         // print(currentColor);
         // print(currentBoostValue);
+
     }
 }

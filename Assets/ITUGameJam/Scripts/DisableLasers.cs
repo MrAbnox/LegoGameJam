@@ -9,23 +9,33 @@ public class DisableLasers : MonoBehaviour
 
     public enum color
     {
-        red,
+        none,
         blue,
         green,
-        none
+        red,
     };
 
     public color enumColor;
-
+    ParticleSystem particleSystem;
 
     void Start()
     {
         // print(color.blue);
+        particleSystem = gameObject.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log((int) enumColor);
+        if (RobotController.CurrentColorPuzzle == (int) enumColor)
+        {
+            particleSystem.Stop();
+        }
+        else
+        {
+            particleSystem.Play();
+        }
         // if (Input.GetKeyDown(KeyCode.E))
         // {
         //     gameObject.SetActive(false);
