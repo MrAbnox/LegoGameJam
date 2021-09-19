@@ -15,12 +15,12 @@ public class InputTranslator : MonoBehaviour
     private bool isActive; //is The player near enough for the activity to recieve input?
     [SerializeField] private float minTimeBetweenTasks;
     [SerializeField] private float maxTimeBetweenTasks;
-    private static bool isTaskActive;
 
 
 
     public RobotController rc;
 
+    private static int activeTasks;
     private int count;
     private float bottomBarPlacement;
     // Start is called before the first frame update
@@ -39,7 +39,6 @@ public class InputTranslator : MonoBehaviour
     {
         if (isActive)
         {
-            Debug.Log("IS ACTIVE");
             ForceInput();
         }
     }
@@ -71,12 +70,11 @@ public class InputTranslator : MonoBehaviour
 
     public void ActivateActivity()
     {
-        if(isTaskActive == false)
+        if(activeTasks < 2)
         {
-            
+            activeTasks++;
             isOn = true;
             onOff.SetActive(true);
-            isTaskActive = true;
         }
     }
 
@@ -85,7 +83,7 @@ public class InputTranslator : MonoBehaviour
         isOn = false;
         onOff.SetActive(false);
         StartCoroutine(ResetTask());
-        isTaskActive = false;
+        activeTasks--;
     }
 
     public void Randomize()
@@ -93,7 +91,6 @@ public class InputTranslator : MonoBehaviour
         bottomBarPlacement = Random.Range(1.0f, 3.0f);
         botBar.transform.localPosition = new Vector3(0, bottomBarPlacement, 0);
         topBar.transform.localPosition = new Vector3(0, bottomBarPlacement + 1.0f, 0);
-
     }
 
     private void OnTriggerEnter(Collider other)

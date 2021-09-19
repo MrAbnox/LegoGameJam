@@ -266,7 +266,6 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     {
         //by Mahmoud//
         // Blink();
-
         if (isMotor && !isABCTaskActive)
         {
             currentTime += Time.deltaTime;
