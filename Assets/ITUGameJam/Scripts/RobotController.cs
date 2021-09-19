@@ -27,6 +27,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     public bool isABCTaskActive;
 
     private float currentGameTime;
+    private bool isConnectedToHub;
 
     // color puzzle
     //0 --> none
@@ -160,6 +161,8 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
             technicColorSensor.RegisterDelegate(this);
         }
         //end
+
+        isConnectedToHub = true;
     }
 
     public void DidUpdateValueData(ILEGOService service, LEGOValue oldValue, LEGOValue newValue)
