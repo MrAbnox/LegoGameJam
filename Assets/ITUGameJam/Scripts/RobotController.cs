@@ -12,6 +12,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     public float currentPitchValue = 0;
     public float currentBoostValue = 0;
     float currentColor;
+    public float maxGameTime;
 
     [SerializeField] private int angleA;
     [SerializeField] private int angleB;
@@ -25,6 +26,7 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     private bool isMotor;
     public bool isABCTaskActive;
 
+    private float currentGameTime;
 
     // color puzzle
     //0 --> none
@@ -285,7 +287,6 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 
                 abcTasks[lastABC].Activate();
 
-                Debug.Log("NEXT ROTATION: " + lastABC);
                 if (lastABC == 0)
                 {
                     Rotate(angleA);

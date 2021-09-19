@@ -18,6 +18,7 @@ public class InputTranslator : MonoBehaviour
     private static bool isTaskActive;
 
 
+
     public RobotController rc;
 
     private int count;
@@ -25,6 +26,7 @@ public class InputTranslator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        onOff.SetActive(false);
         //debug, ison starts true always
         StartCoroutine(ResetTask());
 
@@ -37,6 +39,7 @@ public class InputTranslator : MonoBehaviour
     {
         if (isActive)
         {
+            Debug.Log("IS ACTIVE");
             ForceInput();
         }
     }
@@ -55,7 +58,11 @@ public class InputTranslator : MonoBehaviour
             count++;
             if (count >= 100.0f)
             {
-                CompleteActivity();
+                if(isOn)
+                {
+                    count = 0;
+                    CompleteActivity();
+                }
             }
         }
         print("SuccessCount [" + bottomBarPlacement + "|" + (bottomBarPlacement + 6.0f) + "]: " + count);
@@ -64,9 +71,13 @@ public class InputTranslator : MonoBehaviour
 
     public void ActivateActivity()
     {
-        isOn = true;
-        onOff.SetActive(true);
-
+        if(isTaskActive == false)
+        {
+            
+            isOn = true;
+            onOff.SetActive(true);
+            isTaskActive = true;
+        }
     }
 
     public void CompleteActivity()
@@ -74,6 +85,7 @@ public class InputTranslator : MonoBehaviour
         isOn = false;
         onOff.SetActive(false);
         StartCoroutine(ResetTask());
+        isTaskActive = false;
     }
 
     public void Randomize()

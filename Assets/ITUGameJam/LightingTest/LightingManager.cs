@@ -36,7 +36,6 @@ public class LightingManager : MonoBehaviour
         lastKnownPosition = currentPosition;
         UpdateLights();
         timer--;
-        print(timer);
 
     }
 
