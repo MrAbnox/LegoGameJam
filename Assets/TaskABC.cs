@@ -11,12 +11,16 @@ public class TaskABC : MonoBehaviour
     [SerializeField] private float timeToFinishTask;
     [SerializeField] private Image slider;
 
+    [SerializeField] private ScreenShake screenShake;
+
     private bool isActive;
     private bool isPlayerInside;
     private float currentTime;
+    private bool isCoroutineRunning;
 
     private void Start()
     {
+        isCoroutineRunning = false;
         slider.fillAmount = 0;
         slider.transform.parent.gameObject.SetActive(false);
     }
@@ -41,6 +45,7 @@ public class TaskABC : MonoBehaviour
 
     public void Activate()
     {
+        Debug.Log("ACTIVATE ABC TASK");
         isActive = true;
     }
 
@@ -52,19 +57,49 @@ public class TaskABC : MonoBehaviour
 
     private void Update()
     {
-        if(isActive && isPlayerInside)
+        if(isActive)
         {
-            currentTime += Time.deltaTime;
-            slider.fillAmount = currentTime/timeToFinishTask;
-            if (currentTime >= timeToFinishTask)
+            if (!isCoroutineRunning)
             {
-                slider.transform.parent.gameObject.SetActive(false);
-  
-                currentTime = 0;
-                isActive = false;
-                robotController.isABCTaskActive = false;
-                //TODO: Do some effect when this is done
+                Debug.Log("COROUTINE RUNNING");
+                StartCoroutine(WaitToStopTask());
+                isCoroutineRunning = true;
             }
+
+                if(isPlayerInside)
+                {
+
+                currentTime += Time.deltaTime;
+                slider.fillAmount = currentTime/timeToFinishTask;
+                if (currentTime >= timeToFinishTask)
+                {
+                    slider.transform.parent.gameObject.SetActive(false);
+  
+                    currentTime = 0;
+                    isActive = false;
+                    robotController.isABCTaskActive = false;
+                    //TODO: Do some effect when this is done
+                }
+            }
+        }
+    }
+
+    IEnumerator WaitToStopTask()
+    {
+        yield return new WaitForSeconds(maxActiveTime);
+
+        isCoroutineRunning = false;
+        Debug.Log("ISN?T ACTIVE");
+        if (isActive)
+        {
+            Debug.Log("STOP TASK");
+            isActive = false;
+            currentTime = 0;
+            robotController.isABCTaskActive = false;
+            slider.transform.parent.gameObject.SetActive(false);
+
+            //TODO ADD SCREEN SHAKE BABYYYYYYYYYYYYYYYYYY
+            screenShake.shakeDuration = 2;
         }
     }
 }

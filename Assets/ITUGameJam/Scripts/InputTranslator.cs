@@ -13,6 +13,9 @@ public class InputTranslator : MonoBehaviour
     public GameObject onOff; // Light Element for now.
     private bool isOn; //is Activity in play?
     private bool isActive; //is The player near enough for the activity to recieve input?
+    [SerializeField] private float minTimeBetweenTasks;
+    [SerializeField] private float maxTimeBetweenTasks;
+    private static bool isTaskActive;
 
 
     public RobotController rc;
@@ -23,7 +26,7 @@ public class InputTranslator : MonoBehaviour
     void Start()
     {
         //debug, ison starts true always
-        ActivateActivity();
+        StartCoroutine(ResetTask());
 
         Randomize();
         count = 0;
@@ -32,7 +35,10 @@ public class InputTranslator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActive) { ForceInput(); }
+        if (isActive)
+        {
+            ForceInput();
+        }
     }
 
 
@@ -67,7 +73,7 @@ public class InputTranslator : MonoBehaviour
     {
         isOn = false;
         onOff.SetActive(false);
-
+        StartCoroutine(ResetTask());
     }
 
     public void Randomize()
@@ -91,5 +97,12 @@ public class InputTranslator : MonoBehaviour
         {
             isActive = false;
         }
+    }
+
+    IEnumerator ResetTask()
+    {
+        float random = Random.Range(minTimeBetweenTasks, maxTimeBetweenTasks);
+        yield return new WaitForSeconds(random);
+        ActivateActivity();
     }
 }
