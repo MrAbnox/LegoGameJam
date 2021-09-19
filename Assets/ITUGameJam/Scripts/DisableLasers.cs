@@ -6,7 +6,7 @@ public class DisableLasers : MonoBehaviour
 {
     // Start is called before the first frame update
 
-
+    BoxCollider collider;
     public enum color
     {
         none,
@@ -20,6 +20,10 @@ public class DisableLasers : MonoBehaviour
 
     void Start()
     {
+        if(GetComponent<BoxCollider>())
+        {
+            collider = GetComponent<BoxCollider>();
+        }
         // print(color.blue);
         particleSystem = gameObject.GetComponent<ParticleSystem>();
     }
@@ -31,10 +35,14 @@ public class DisableLasers : MonoBehaviour
         if (RobotController.CurrentColorPuzzle == (int) enumColor)
         {
             particleSystem.Stop();
+            if(collider)
+                collider.enabled = false;
         }
         else
         {
             particleSystem.Play();
+            if(collider)
+                collider.enabled = true;
         }
         // if (Input.GetKeyDown(KeyCode.E))
         // {

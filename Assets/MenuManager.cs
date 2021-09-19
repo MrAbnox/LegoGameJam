@@ -23,7 +23,6 @@ public class MenuManager : MonoBehaviour
         quitbtn.onClick.AddListener(QuitGame);
         isOnline.color = Color.black;
         statusText.text = "No Technic Hub found!";
-
     }
 
     void StartGame()
@@ -48,21 +47,4 @@ public class MenuManager : MonoBehaviour
         statusText.text = "Technic Hub Connected!";
         isOnline.color = Color.white;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    /*
-    void Start () {
-		Button btn = yourButton.GetComponent<Button>();
-		btn.onClick.AddListener(TaskOnClick);
-	}
-
-	void TaskOnClick(){
-		Debug.Log ("You have clicked the button!");
-	}
-    */
 }

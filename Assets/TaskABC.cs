@@ -28,7 +28,6 @@ public class TaskABC : MonoBehaviour
             if (isActive)
                 slider.transform.parent.gameObject.SetActive(true);
         }
-
     }
 
     private void OnTriggerExit(Collider other)
