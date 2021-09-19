@@ -40,19 +40,19 @@ public class InputTranslator : MonoBehaviour
     {
 
         // move line bar.
-        line.transform.localPosition = new Vector3(0, rc.currentBoostValue / 22, 0);
+        line.transform.localPosition = new Vector3(0, rc.currentBoostValue / 18, 0);
 
         // Check completion constraints
 
-        if ((rc.currentBoostValue / 22) > bottomBarPlacement && (rc.currentBoostValue / 22) < (bottomBarPlacement + 1.0f))
+        if ((rc.currentBoostValue / 20) > bottomBarPlacement && (rc.currentBoostValue / 18) < (bottomBarPlacement + 6.0f))
         {
             count++;
-            if (count >= 1000.0f)
+            if (count >= 100.0f)
             {
                 CompleteActivity();
             }
         }
-        print("SuccessCount [" + bottomBarPlacement + "|" + (bottomBarPlacement + 1.0f) + "]: " + count);
+        print("SuccessCount [" + bottomBarPlacement + "|" + (bottomBarPlacement + 6.0f) + "]: " + count);
 
     }
 
