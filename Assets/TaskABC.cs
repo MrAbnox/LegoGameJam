@@ -66,7 +66,7 @@ public class TaskABC : MonoBehaviour
                 isCoroutineRunning = true;
             }
 
-                if(isPlayerInside)
+            if(isPlayerInside)
                 {
 
                 currentTime += Time.deltaTime;
