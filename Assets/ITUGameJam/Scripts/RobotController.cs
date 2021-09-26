@@ -46,13 +46,11 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
 
     LEGOTechnicForceSensor forceSensor;
 
-    // LEGOTechnicColorSensor technicColorSensor;
-    // by Mahmoud
     LEGOColorSensor colorSensor;
     LEGOTechnicDistanceSensor technicDistanceSensor;
 
     LEGOTechnicColorSensor technicColorSensor;
-    // private DistanceSensor distanceSensor;
+
     LEGOVisionSensor visionSensor;
 
 
