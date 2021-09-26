@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5226865508708992921}
   - component: {fileID: 5226865508708992920}
   - component: {fileID: 5226865508708992927}
+  - component: {fileID: 177175068}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -101,6 +102,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &177175068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5226865508708992926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e06d3e27f5214044a420d5e655898be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 6913235213978505833}
+  pauseButton: {fileID: 5226865509291446806}
 --- !u!1 &5226865509291446806
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +129,7 @@ GameObject:
   - component: {fileID: 5226865509291446801}
   - component: {fileID: 5226865509291446800}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Pause Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,11 +149,11 @@ RectTransform:
   m_Father: {fileID: 5226865508708992922}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -100}
-  m_SizeDelta: {x: 150, y: 150}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -50, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &5226865509291446802
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -221,7 +236,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 177175068}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
@@ -340,8 +355,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2416927552082758980, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_text
+      value: Exit Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 177175068}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832987043945868333, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 177175068}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResumeGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenuManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261886383142846600, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+--- !u!1 &6913235213978505833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1691436667838005161, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}
+  m_PrefabInstance: {fileID: 5226865508105907648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6258243897333805174 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2184300615695506870, guid: 26f93f3a2fcdac6419421454a7a11faf, type: 3}

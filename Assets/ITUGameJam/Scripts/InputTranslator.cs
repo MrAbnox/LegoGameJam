@@ -64,7 +64,7 @@ public class InputTranslator : MonoBehaviour
                 }
             }
         }
-        print("SuccessCount [" + bottomBarPlacement + "|" + (bottomBarPlacement + 6.0f) + "]: " + count);
+        //print("SuccessCount [" + bottomBarPlacement + "|" + (bottomBarPlacement + 6.0f) + "]: " + count);
 
     }
 
