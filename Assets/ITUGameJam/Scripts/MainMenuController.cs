@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private RawImage hubIcon;
     [SerializeField] private TextMeshProUGUI hubText;
+    [SerializeField] private Button playGameButton;
 
 
     private float darkHubIconDarkness;
@@ -19,7 +20,7 @@ public class MainMenuController : MonoBehaviour
     private void Start()
     {
         darkHubIconDarkness = hubIcon.color.r;
-        SetHubIconDark();
+        HubDisconnected();
     }
 
     public void PlayGame()
@@ -39,6 +40,7 @@ public class MainMenuController : MonoBehaviour
 
     public void HubConnected()
     {
+        playGameButton.interactable = true;
         SetHubIconLight();
         hubText.text = connectedText;
     }
@@ -47,6 +49,7 @@ public class MainMenuController : MonoBehaviour
     {
         SetHubIconDark();
         hubText.text = "No " + connectedText;
+        playGameButton.interactable = false;
     }
 
     //Dark meaning HUB isn't connected

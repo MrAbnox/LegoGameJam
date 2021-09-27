@@ -6,7 +6,6 @@ public class LightingManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public RobotController rc; // direct reference to the controller sourcing variables
     [SerializeField] private float lightSpeed;
     public Light[] lights; // array of light elements to be adjusted.
     private float timer; // timer/intensity of lights.
@@ -18,14 +17,14 @@ public class LightingManager : MonoBehaviour
     void Start()
     {
         timer = 500.0f; //debug value
-        lastKnownPosition = rc.currentRollValue;
+        lastKnownPosition = GameManager.instance.CurrentRollValue;
     }
 
     // Update is called once per frame
     void Update()
     {
         //needs and update to robotController.
-        currentPosition = rc.currentPitchValue;
+        currentPosition = GameManager.instance.CurrentPitchValue;
 
         // If motor position is in growth, add the growth to the timer.
         if (currentPosition > lastKnownPosition)

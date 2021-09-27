@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class TaskABC : MonoBehaviour
 {
-
-    [SerializeField] private RobotController robotController;
     [SerializeField] private float maxActiveTime;
     [SerializeField] private float timeToFinishTask;
     [SerializeField] private Image slider;
@@ -77,7 +75,7 @@ public class TaskABC : MonoBehaviour
   
                     currentTime = 0;
                     isActive = false;
-                    robotController.isABCTaskActive = false;
+                    GameManager.instance.IsABCTaskActive = false;
                     //TODO: Do some effect when this is done
                 }
             }
@@ -89,17 +87,18 @@ public class TaskABC : MonoBehaviour
         yield return new WaitForSeconds(maxActiveTime);
 
         isCoroutineRunning = false;
-        Debug.Log("ISN?T ACTIVE");
+
         if (isActive)
         {
             Debug.Log("STOP TASK");
             isActive = false;
             currentTime = 0;
-            robotController.isABCTaskActive = false;
+            GameManager.instance.IsABCTaskActive = false;
             slider.transform.parent.gameObject.SetActive(false);
 
-            //TODO ADD SCREEN SHAKE BABYYYYYYYYYYYYYYYYYY
             screenShake.shakeDuration = 2;
+
+            //TODO: Mask Task failing visual
         }
     }
 }

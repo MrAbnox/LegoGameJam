@@ -10,42 +10,54 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
 {
     public static GameManager instance;
 
+    [SerializeField] private int angleA;
+    [SerializeField] private int angleB;
+    [SerializeField] private int angleC;
+    [SerializeField] private float timeBetweenABC;
+    [SerializeField] private TaskABC[] abcTasks;
+
+    private static int currentColorPuzzle;
+
     ILEGODevice device;
-    private bool isConnectedToHub;
+
+    private float currentColor;
+    private float currentTime = 0;
     private float currentRollValue = 0;
     private float currentPitchValue = 0;
     private float currentBoostValue = 0;
-    float currentColor;
+
+    private int lastABC = -1;
 
     private bool isMotor;
+    private bool isABCTaskActive;
 
-    LEGOTechnicMotor pitchMotor;
-    LEGOTechnicMotor rollMotor;
     LEGORGBLight rgbLight;
+    LEGOTechnicMotor rollMotor;
+    LEGOTechnicMotor pitchMotor;
 
-    LEGOTechnicForceSensor forceSensor;
-
-    LEGOColorSensor colorSensor;
-    LEGOTechnicDistanceSensor technicDistanceSensor;
-
-    LEGOTechnicColorSensor technicColorSensor;
     LEGOVisionSensor visionSensor;
+    LEGOTechnicForceSensor forceSensor;
+    LEGOTechnicColorSensor technicColorSensor;
 
     public ILEGODevice Device { get => device; }
+    public float CurrentRollValue { get => currentRollValue; }
+    public float CurrentBoostValue { get => currentBoostValue; }
+    public float CurrentPitchValue { get => currentPitchValue; }
+    public bool IsABCTaskActive { get => isABCTaskActive; set => isABCTaskActive = value; }
+    public static int CurrentColorPuzzle { get => currentColorPuzzle; set => currentColorPuzzle = value; }
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Debug.Log("There's one too many GameManagers in the Scene");
             Destroy(this);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public void SetUpWithDevice(ILEGODevice device)
@@ -118,7 +130,7 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
             forceSensor.UpdateInputFormat(new LEGOInputFormat(forceSensor.ConnectInfo.PortID, forceSensor.ioType, mode, 1, LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw, true));
             forceSensor.RegisterDelegate(this);
         }
-        //new by mahmoud
+
         var visionSensorServises = ServiceHelper.GetServicesOfType(device, IOType.LEIOTypeVisionSensor);
         if (visionSensorServises == null || visionSensorServises.Count() == 0)
         {
@@ -146,9 +158,6 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
             technicColorSensor.UpdateInputFormat(new LEGOInputFormat(technicColorSensor.ConnectInfo.PortID, technicColorSensor.ioType, 0, 1, LEGOInputFormat.InputFormatUnit.LEInputFormatUnitRaw, true));
             technicColorSensor.RegisterDelegate(this);
         }
-        //end
-
-        isConnectedToHub = true;
     }
 
     public void DidUpdateValueData(ILEGOService service, LEGOValue oldValue, LEGOValue newValue)
@@ -164,15 +173,6 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
         else if (service == forceSensor)
         {
             currentBoostValue = newValue.RawValues[0];
-        }
-        else if (service == visionSensor)
-        {
-            // currentColor = newValue.;
-            // currentColor3 = newValue.RawData[0];
-            // currentColor = newValue.RawValues[0];
-            // currentColor2 = newValue.RawValuesToString();
-            // currentColor2 = newValue.ModeName;
-            // mm = "false";
         }
         else if (service == technicColorSensor)
         {
@@ -201,5 +201,82 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
     public void DidUpdateInputFormatCombined(ILEGOService service, LEGOInputFormatCombined oldFormat, LEGOInputFormatCombined newFormat)
     {
         //    Debug.LogFormat("DidUpdateInputFormatCombined {0} to {1}", service, newFormat);
+    }
+
+    private void UpdateTasksABC()
+    {
+        if (isMotor && !isABCTaskActive)
+        {
+            currentTime += Time.deltaTime;
+
+            if (currentTime >= timeBetweenABC)
+            {
+                isABCTaskActive = true;
+                currentTime = 0;
+
+                int randomABC = 0;
+                do
+                {
+                    randomABC = Random.Range(0, 3);
+
+                } while (randomABC == lastABC);
+
+                lastABC = randomABC;
+
+                abcTasks[lastABC].Activate();
+
+                if (lastABC == 0)
+                {
+                    Rotate(angleA);
+                }
+                else if (lastABC == 1)
+                {
+                    Rotate(angleB);
+                }
+                else if (lastABC == 2)
+                {
+                    Rotate(angleC);
+                }
+            }
+        }
+    }
+
+    private void ColorScannerUpdate()
+    {
+        if (currentColor == 3)
+        {
+            CurrentColorPuzzle = 1;
+        }
+        //Green
+        else if (currentColor == 5)
+        {
+            CurrentColorPuzzle = 2;
+        }
+        //Red
+        else if (currentColor == 9)
+        {
+            CurrentColorPuzzle = 3;
+        }
+        else
+        {
+            CurrentColorPuzzle = 0;
+        }
+    }
+
+    private void Rotate(int degree)
+    {
+        var rollCmd = new LEGOTachoMotorCommon.SetSpeedPositionCommand()
+        {
+            Position = degree,
+            Speed = 2
+        };
+        rollCmd.SetEndState(MotorWithTachoEndState.Drifting);
+        rollMotor.SendCommand(rollCmd);
+    }
+
+    private void Update()
+    {
+        UpdateTasksABC();
+        ColorScannerUpdate();
     }
 }

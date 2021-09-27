@@ -16,10 +16,6 @@ public class InputTranslator : MonoBehaviour
     [SerializeField] private float minTimeBetweenTasks;
     [SerializeField] private float maxTimeBetweenTasks;
 
-
-
-    public RobotController rc;
-
     private static int activeTasks;
     private int count;
     private float bottomBarPlacement;
@@ -48,11 +44,11 @@ public class InputTranslator : MonoBehaviour
     {
 
         // move line bar.
-        line.transform.localPosition = new Vector3(0, rc.currentBoostValue / 18, 0);
+        line.transform.localPosition = new Vector3(0, GameManager.instance.CurrentBoostValue / 18, 0);
 
         // Check completion constraints
 
-        if ((rc.currentBoostValue / 20) > bottomBarPlacement && (rc.currentBoostValue / 18) < (bottomBarPlacement + 6.0f))
+        if ((GameManager.instance.CurrentBoostValue / 20) > bottomBarPlacement && (GameManager.instance.CurrentBoostValue / 18) < (bottomBarPlacement + 6.0f))
         {
             count++;
             if (count >= 100.0f)

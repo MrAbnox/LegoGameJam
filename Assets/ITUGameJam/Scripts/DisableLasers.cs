@@ -32,7 +32,7 @@ public class DisableLasers : MonoBehaviour
     void Update()
     {
         // Debug.Log((int) enumColor);
-        if (RobotController.CurrentColorPuzzle == (int) enumColor)
+        if (GameManager.CurrentColorPuzzle == (int) enumColor)
         {
             particleSystem.Stop();
             if(collider)
@@ -44,9 +44,5 @@ public class DisableLasers : MonoBehaviour
             if(collider)
                 collider.enabled = true;
         }
-        // if (Input.GetKeyDown(KeyCode.E))
-        // {
-        //     gameObject.SetActive(false);
-        // }
     }
 }
