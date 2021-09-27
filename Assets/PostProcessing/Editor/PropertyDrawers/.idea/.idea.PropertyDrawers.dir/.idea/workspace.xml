@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e6a1feb7-6de9-4182-91a3-55429ce5f8a0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level/Main Camera Profile.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level/Main Camera Profile.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level_Profiles.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level_Profiles/PostProcessing Profile 1.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level_Profiles/PostProcessing Profile 1.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level_Profiles/PostProcessing Profile.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level_Profiles/PostProcessing Profile.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Test.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Test/GameObject Profile.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Test/GameObject Profile.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Main Camera.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../Main Camera.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../PostProcessing.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Editor.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PropertyDrawers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.PropertyDrawers.dir/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../TestPP_Profiles.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../TestPP_Profiles/Main Camera Profile.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../TestPP_Profiles/Main Camera Profile.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../TestPostProcessin.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../TestPostProcessin.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scenes/Final Level.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ITUGameJam/Scripts/LightingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ITUGameJam/Scripts/LightingManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ITUGameJam/Scripts/RobotController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cpplog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cpplog.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../../ITUGameJam/Scripts/LightingManager.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1yj1CkrlVV2KPpYIoLKdR3rSzZ0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6a1feb7-6de9-4182-91a3-55429ce5f8a0" name="Changes" comment="" />
+      <created>1632750061704</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632750061704</updated>
+      <workItem from="1632750066335" duration="1178000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

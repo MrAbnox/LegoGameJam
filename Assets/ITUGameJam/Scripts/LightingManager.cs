@@ -6,7 +6,8 @@ public class LightingManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private float lightSpeed;
+    [SerializeField]
+    private float lightSpeed;
     public Light[] lights; // array of light elements to be adjusted.
     private float timer; // timer/intensity of lights.
     private const float timerCap = 500.0f; // constant value that does not change
