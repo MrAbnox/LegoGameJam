@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
     private int lastABC = -1;
 
     private bool isMotor;
+    private bool isGamePlaying;
     private bool isABCTaskActive;
 
     LEGORGBLight rgbLight;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
     public float CurrentPitchValue { get => currentPitchValue; }
     public bool IsABCTaskActive { get => isABCTaskActive; set => isABCTaskActive = value; }
     public static int CurrentColorPuzzle { get => currentColorPuzzle; set => currentColorPuzzle = value; }
+    public bool IsGamePlaying { get => isGamePlaying; set => isGamePlaying = value; }
 
     private void Awake()
     {
@@ -250,11 +252,13 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
         //Green
         else if (currentColor == 5)
         {
+            Debug.Log("GREEN");
             CurrentColorPuzzle = 2;
         }
         //Red
         else if (currentColor == 9)
         {
+            Debug.Log("RED");
             CurrentColorPuzzle = 3;
         }
         else
@@ -276,7 +280,10 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
 
     private void Update()
     {
-        UpdateTasksABC();
-        ColorScannerUpdate();
+        if(isGamePlaying)
+        {
+            UpdateTasksABC();
+            ColorScannerUpdate();
+        }
     }
 }

@@ -20,6 +20,7 @@ public class DisableLasers : MonoBehaviour
 
     void Start()
     {
+        GameManager.instance.IsGamePlaying = true;
         if(GetComponent<BoxCollider>())
         {
             collider = GetComponent<BoxCollider>();
