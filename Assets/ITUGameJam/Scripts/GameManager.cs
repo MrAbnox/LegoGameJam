@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
             Debug.Log("There's one too many GameManagers in the Scene");
             Destroy(this);
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetUpWithDevice(ILEGODevice device)
