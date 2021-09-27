@@ -14,6 +14,7 @@ public class MainMenuController : MonoBehaviour
     private float darkHubIconDarkness;
 
     private string connectedText = "Technic Hub connected";
+    private bool isHubConnected;
     // Start is called before the first frame update
     private void Start()
     {
@@ -49,15 +50,25 @@ public class MainMenuController : MonoBehaviour
     }
 
     //Dark meaning HUB isn't connected
-    public void SetHubIconDark()
+    private void SetHubIconDark()
     {
         Color tempColor = new Color(darkHubIconDarkness, darkHubIconDarkness, darkHubIconDarkness);
         hubIcon.color = tempColor;
     }
 
     //Light meaning Hub is connected
-    public void SetHubIconLight()
+    private void SetHubIconLight()
     {
         hubIcon.color = Color.white;
+    }
+
+    private void Update()
+    {
+        if(GameManager.instance.Device != null && isHubConnected == false)
+        {
+            isHubConnected = true;
+            HubConnected();
+            GetComponent<AudioSource>().Play();
+        }
     }
 }

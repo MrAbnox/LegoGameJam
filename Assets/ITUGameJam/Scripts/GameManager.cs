@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
     public static GameManager instance;
 
     ILEGODevice device;
+    private bool isConnectedToHub;
+    private float currentRollValue = 0;
+    private float currentPitchValue = 0;
+    private float currentBoostValue = 0;
+    float currentColor;
 
     private bool isMotor;
 
@@ -26,6 +31,20 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
     LEGOTechnicColorSensor technicColorSensor;
     LEGOVisionSensor visionSensor;
 
+    public ILEGODevice Device { get => device; }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("There's one too many GameManagers in the Scene");
+            Destroy(this);
+        }
+    }
 
     public void SetUpWithDevice(ILEGODevice device)
     {
@@ -53,7 +72,6 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
         }
         else
         {
-            Debug.Log("MOTOR is ON");
             isMotor = true;
             rollMotor = (LEGOTechnicMotor)rollMotors.First();
             Debug.LogFormat("Has motor service {0}", rollMotor);
@@ -182,19 +200,4 @@ public class GameManager : MonoBehaviour, ILEGOGeneralServiceDelegate
     {
         //    Debug.LogFormat("DidUpdateInputFormatCombined {0} to {1}", service, newFormat);
     }
-
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Debug.Log("There's one too many GameManagers in the Scene");
-            Destroy(this);
-        }
-    }
-
-
 }

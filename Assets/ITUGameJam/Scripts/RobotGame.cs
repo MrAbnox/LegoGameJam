@@ -7,12 +7,12 @@ public class RobotGame : MonoBehaviour
 {
     [SerializeField] bool connectToBLE;
     public DeviceHandler deviceHandler;
-    RobotController robotController;
+    //RobotController robotController;
 
     // Start is called before the first frame update
     void Start()
     {
-        robotController = GetComponent<RobotController>();
+        //robotController = GetComponent<RobotController>();
         deviceHandler.OnDeviceInitialized += OnDeviceInitialized;
         if (connectToBLE == true)
             deviceHandler.AutoConnectToDeviceOfType(HubType.Technic);
@@ -21,6 +21,7 @@ public class RobotGame : MonoBehaviour
     public void OnDeviceInitialized(ILEGODevice device)
     {
         Debug.LogFormat("OnDeviceInitialized {0}", device);
-        robotController.SetUpWithDevice(device);
+        //robotController.SetUpWithDevice(device);
+        GameManager.instance.SetUpWithDevice(device);
     }
 }

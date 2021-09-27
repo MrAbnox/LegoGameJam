@@ -11,8 +11,8 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
     public float currentRollValue = 0;
     public float currentPitchValue = 0;
     public float currentBoostValue = 0;
-    float currentColor;
     public float maxGameTime;
+    float currentColor;
 
     [SerializeField] private int angleA;
     [SerializeField] private int angleB;
@@ -301,7 +301,6 @@ public class RobotController : MonoBehaviour, ILEGOGeneralServiceDelegate
                 }
             }
         }
-        // Debug.Log("currentRollValue {0}" + currentRollValue );
 
         //Color Puzzle
         //blue
