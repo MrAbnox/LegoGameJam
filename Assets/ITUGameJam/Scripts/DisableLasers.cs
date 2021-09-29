@@ -18,15 +18,19 @@ public class DisableLasers : MonoBehaviour
     public color enumColor;
     ParticleSystem particleSystem;
 
-    void Start()
+    void Awake()
     {
-        GameManager.instance.IsGamePlaying = true;
-        if(GetComponent<BoxCollider>())
+        // GameManager.instance.IsGamePlaying = true;
+        if (GetComponent<BoxCollider>())
         {
             collider = GetComponent<BoxCollider>();
         }
+
         // print(color.blue);
-        particleSystem = gameObject.GetComponent<ParticleSystem>();
+        if (gameObject.GetComponent<ParticleSystem>() != null)
+        {
+            particleSystem = gameObject.GetComponent<ParticleSystem>();
+        }
     }
 
     // Update is called once per frame
